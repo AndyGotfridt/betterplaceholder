@@ -28,27 +28,39 @@ var $inputTextcolour = $('#input-textcolour');
 var $string          = $('#string');
 var $inputString     = $('#input-string');
 var $font            = $('#font');
-var $inputFontSize   = $('#input-fontsize');
-var $fontSize        = $('#fontsize');
+var $inputFormat     = $('#input-format');
+var $format          = $('#format');
+var $inputRetina     = $('#input-retina');
+var $retina          = $('#retina');
 
 function updateColours() {
   $bgcolour.html( '/' + $inputBgcolour.val().replace( '#', '' ) );
   $textcolour.html('/' + $inputTextcolour.val().replace( '#', '' ) );
 }
 
-// Reenable preview reset buttons when any input changes
+// Re-enable preview reset buttons when any input changes
 $( 'input, select' ).on( 'change keyup paste', function () {
   $('.js-preview-button, .js-reset-button').removeClass('button--disabled');
 });
 
 // Updates value for width every time a key is entered in that field
-$inputWidth.on( 'change keyup paste', function () {
-  $width.html($inputWidth.val());
+$inputWidth.on( 'change paste', function () {
+  let val = +$inputWidth.val();
+  if (val < 10 || val > 4000) {
+    $inputWidth.val(600);
+    val = 600;
+  }
+  $width.html(val);
 });
 
 // Updates value for height every time a key is entered in that field
-$inputHeight.on( 'change keyup paste', function () {
-  $height.html('x' + $inputHeight.val());
+$inputHeight.on( 'change paste', function () {
+  let val = +$inputHeight.val();
+  if (val < 10 || val > 4000) {
+    $inputHeight.val(400);
+    val = 400;
+  }
+  $height.html('x' + val);
 });
 
 // Updates value for background colour every time a key is entered in that field
@@ -89,29 +101,46 @@ $('#input-font').on('change', function () {
 
 // Update the font value
 function updateFont() {
-  if ( $('#input-font').val() == 'yanone' ) {
+  if ( $('#input-font').val() === 'lato' ) {
     $font.text( '' );
-  } else if ( $inputString.val() == '' ) {
+  } else if ( $inputString.val() === '' ) {
     $font.text( '?font=' + $('#input-font').val() );
   } else {
     $font.text( '&font=' + $('#input-font').val() );
   }
 }
 
-// Updates font size value every time a new option is selected
-$inputFontSize.on('change', function () {
-  updateFontSize();
+// Updates format value every time a new option is selected
+$inputFormat.on('change', function () {
+  updateFormat();
 });
 
-// Updates font size value
-function updateFontSize() {
-  if ( $inputFontSize.val() == '' ) {
-    $fontSize.empty();
-  } else if ( $inputString.val() == '' && $font.text() == '' ) {
-    $fontSize.text( '?font_size=' + $inputFontSize.val() );
-  } else {
-    $fontSize.text( '&font_size=' + $inputFontSize.val() );
+// Updates format value
+function updateFormat() {
+  const formatSelected = $inputFormat.val();
+  const retinaVal = $inputRetina.val();
+
+  if (formatSelected.includes('svg') && retinaVal !== '') {
+    $inputRetina.val('');
   }
+
+  $format.text(`/${formatSelected}`);
+}
+
+// Updates Retina value every time a new option is selected
+$inputRetina.on('change', function () {
+  updateRetina();
+});
+
+// Updates Retina value
+function updateRetina() {
+  const formatSelected = $inputFormat.val();
+  let retinaSelected = $inputRetina.val();
+  if(formatSelected.includes('svg')){
+    $inputRetina.val('');
+    return;
+  }
+  $retina.text(retinaSelected ? `@${retinaSelected}` : '');
 }
 
 // Instantiate clipboard.js
@@ -158,18 +187,19 @@ $('.js-reset-button').click(function() {
   // Reset dimensions, colours, string, and font to defaults
   $( '#input-width' ).val( '600' );
   $( '#input-height' ).val( '400' );
-  $( '#input-bgcolour' ).val( '#cccccc' );
-  $( '#input-textcolour' ).val( '#969696' );
+  $( '#input-bgcolour' ).val( '#DDDDDD' );
+  $( '#input-textcolour' ).val( '#999999' );
   $( '#input-string' ).val( '' );
-  $( '#input-font' ).val( 'yanone' );
-  $( '#input-fontsize').val( '' );
+  $( '#input-font' ).val( 'lato' );
+  $( '#input-format').val( 'svg' );
+  $( '#input-retina').val( '' );
   // Reset colour swatches
   $('#input-bgcolour').parent().find( '.minicolors-swatch-color' ).attr('style', 'background-color: rgb(204, 204, 204); opacity: 1;');
   $('#input-textcolour').parent().find('.minicolors-swatch-color').attr('style', 'background-color: rgb(150, 150, 150); opacity: 1;');
   // Remove existing preview image
   $('.preview-image').empty();
   // Add new image with new URL
-  $('.preview-image' ).append('<img src="https://fakeimg.pl/600x400">');
+  $('.preview-image' ).append('<img src="https://placehold.co/600x400">');
   // Disable another click on reset and preview buttons
   $('.js-preview-button, .js-reset-button').addClass('button--disabled');
 });

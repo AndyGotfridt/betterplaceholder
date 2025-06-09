@@ -2,7 +2,7 @@
 
 Quickly generate custom placeholder images for your design and development projects.
 
-Builds on the fakeimg.pl service.
+Builds on the placehold.co service.
 
 ## Local development
 

@@ -57,40 +57,83 @@
     <main class="flex-1">
       <div class="color-bg-default border rounded-2 p-3 mt-3">
         <div class="d-flex flex-items-center">
-          <label class="flex-1 mr-4" for="input-width">Width</label>
+          <label class="flex-1 mr-4" for="input-width">
+            Width
+            <span class="tooltipped tooltipped-n" aria-label="Min: 10px Max: 4000 px">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="#666" style="margin-left:4px; cursor:help;">
+                <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm.75 15h-1.5v-6h1.5v6zm0-8h-1.5V7h1.5v2z"/>
+              </svg>
+            </span>
+          </label>
           <input class="flex-1 form-control width-full" name="input-width" id="input-width" type="number" value="600" min="1">
         </div>
 
         <div class="mt-2 d-flex flex-items-center">
-          <label class="flex-1 mr-4" for="input-height">Height</label>
+          <label class="flex-1 mr-4" for="input-height">
+            Height
+            <span class="tooltipped tooltipped-n" aria-label="Min: 10px Max: 4000 px">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="#666" style="margin-left:4px; cursor:help;">
+                <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm.75 15h-1.5v-6h1.5v6zm0-8h-1.5V7h1.5v2z"/>
+              </svg>
+            </span>
+          </label>
           <input class="flex-1 form-control width-full" name="input-height" id="input-height" type="number" value="400" min="1">
+        </div>
+
+        <div class="d-flex flex-items-center mt-3">
+          <label for="input-format" class="flex-1 mr-5">Format</label>
+          <select name="input-format" id="input-format" class="form-select flex-1" aria-label="Format">
+            <option value="avif">AVIF</option>
+            <option value="gif">GIF</option>
+            <option value="jpeg">JPEG</option>
+            <option value="png">PNG</option>
+            <option value="svg" selected>SVG</option>
+            <option value="webp">WebP</option>
+          </select>
+        </div>
+
+        <div class="d-flex flex-items-center mt-3">
+          <label for="input-retina" class="flex-1 mr-5">
+            Retina
+            <span class="tooltipped tooltipped-n" aria-label="Not available in SVG">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="#666" style="margin-left:4px; cursor:help;">
+                <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm.75 15h-1.5v-6h1.5v6zm0-8h-1.5V7h1.5v2z"/>
+              </svg>
+            </span>
+          </label>
+          <select name="input-retina" id="input-retina" class="form-select flex-1" aria-label="Retina">
+            <option value="" selected>-</option>
+            <option value="2x">2x</option>
+            <option value="3x">3x</option>
+          </select>
         </div>
 
         <div class="mt-3 d-flex flex-items-center">
           <label class="flex-1 mr-2" for="input-bgcolour">Background</label>
-          <input class="flex-1 form-control input--colour" name="input-bgcolour" id="input-bgcolour" type="text" value="#ccc">
+          <input class="flex-1 form-control input--colour" name="input-bgcolour" id="input-bgcolour" type="text" value="#DDDDDD">
         </div>
 
         <div class="mt-2 d-flex flex-items-center">
           <label class="flex-1 mr-2" for="input-textcolour">Text</label>
-          <input class="flex-1 form-control input--colour" name="input-textcolour" id="input-textcolour" type="text" value="#909090">
+          <input class="flex-1 form-control input--colour" name="input-textcolour" id="input-textcolour" type="text" value="#999999">
         </div>
 
         <div class="d-flex flex-items-center mt-3">
           <label for="input-font" class="flex-1 mr-5">Font</label>
           <select name="input-font" id="input-font" class="form-select flex-1" aria-label="Font">
-            <option value="bebas">Bebas</option>
-            <option value="lobster">Lobster</option>
-            <option value="museo">Museo</option>
-            <option value="noto">Noto Sans</option>
-            <option value="noto-serif">Noto Serif</option>
-            <option value="yanone" selected>Yanone</option>
+            <option value="lato" selected>Lato</option>
+            <option value="lora">Lora</option>
+            <option value="montserrat">Montserrat</option>
+            <option value="noto-sans">Noto Sans</option>
+            <option value="open-sans">Open Sans</option>
+            <option value="oswald">Oswald</option>
+            <option value="playfair-display">Playfair Display</option>
+            <option value="poppins">Poppins</option>
+            <option value="pt-sans">PT Sans</option>
+            <option value="raleway">Raleway</option>
+            <option value="roboto">Roboto</option>
+            <option value="source-sans-pro">Source Sans Pro</option>
           </select>
-        </div>
-
-        <div class="mt-2 d-flex flex-items-center">
-          <label for="input-fontsize" class="flex-1 mr-4">Font size</label>
-          <input class="flex-1 form-control width-full" name="input-fontsize" id="input-fontsize" type="number" value="" min="1">
         </div>
 
         <div class="mt-3">
@@ -111,8 +154,8 @@
 
       <div class="color-bg-default border rounded-2 p-3 mt-3">
         <div class="created-url border color-border-muted rounded-1 color-bg-subtle p-2 text-mono f6 wb-break-word">
-          https://fakeimg.pl/<span id="width">600</span><span id="height">x400</span><span
-            id="bgcolour"></span><span id="textcolour"></span><span id="string"></span><span id="font"></span><span id="fontsize"></span>
+          https://placehold.co/<span id="width">600</span><span id="height">x400</span><span id="retina"></span><span
+            id="bgcolour"></span><span id="textcolour"></span><span id="format"></span><span id="string"></span><span id="font"></span>
         </div>
 
         <div class="d-flex flex-wrap mt-2">
@@ -121,7 +164,6 @@
           </button>
         </div>
       </div>
-
 
     </main>
 
@@ -134,9 +176,7 @@
 
   <aside class="px-4 p-sm-4 flex-sm-1 d-flex flex-items-center flex-justify-center overflow-sm-y-auto">
     <div class="preview-image border rounded-2 width-fit height-fit overflow-hidden">
-      <img
-        src="https://fakeimg.pl/600x400"
-        alt="Preview of placeholder image">
+      <img src="https://placehold.co/600x400" alt="Preview of placeholder image">
     </div>
   </aside>
 
