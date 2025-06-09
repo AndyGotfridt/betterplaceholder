@@ -180,7 +180,7 @@ $('.js-reset-button').click(function() {
     .removeAttr('checked')
     .removeAttr('selected');
   // Clear all the variable spans
-  $( '#bgcolour, #textcolour, #string, #font' ).empty();
+  $( '#bgcolour, #textcolour, #string, #font, #format, #retina' ).empty();
   $( '#width' ).text( '600');
   $( '#height' ).text( 'x400');
   $( '#fontsize' ).empty();
